@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STEM24", "STEM24\STEM24.csproj", "{5B0BFB87-C92C-4F2F-872C-A1C9BB9174AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "STEM24", "STEM24\STEM24.csproj", "{5B0BFB87-C92C-4F2F-872C-A1C9BB9174AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STEM24.Model", "STEM24.Model\STEM24.Model.csproj", "{16DA656F-6544-4845-BBB4-657AFB488581}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STEM24.Service", "STEM24.Service\STEM24.Service.csproj", "{5F401E2A-39FE-4360-8A4D-789E296DC9D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{5B0BFB87-C92C-4F2F-872C-A1C9BB9174AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B0BFB87-C92C-4F2F-872C-A1C9BB9174AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B0BFB87-C92C-4F2F-872C-A1C9BB9174AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16DA656F-6544-4845-BBB4-657AFB488581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16DA656F-6544-4845-BBB4-657AFB488581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16DA656F-6544-4845-BBB4-657AFB488581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16DA656F-6544-4845-BBB4-657AFB488581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F401E2A-39FE-4360-8A4D-789E296DC9D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F401E2A-39FE-4360-8A4D-789E296DC9D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F401E2A-39FE-4360-8A4D-789E296DC9D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F401E2A-39FE-4360-8A4D-789E296DC9D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
