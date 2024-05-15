@@ -1,0 +1,13 @@
+<mat-dialog-content>
+    @for(t of text; track t) {
+        <p>{{t}}</p>
+    }
+    @if(data.autoClose) {
+        <p class="countdown">{{ 'Ovaj prozor će se zatvoriti u {' + data.autoClose + '} seconds.' }}</p>
+    }
+    
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close color="accent">{{ 'U redu' }}</button>
+</mat-dialog-actions>

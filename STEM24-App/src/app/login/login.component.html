@@ -1,0 +1,18 @@
+<div class="body-container">
+    <h1>Welcome back!</h1>
+    <h2>Don't have an account?  <a href="">Create it</a> </h2>
+
+    <form ngForm="#loginForm" class="login-form">
+        <mat-form-field class="w-100">
+            <mat-label>E-mail</mat-label>
+            <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
+        </mat-form-field>
+    
+        <mat-form-field class="w-100">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" [(ngModel)]="password" ngModel name="password" required>
+        </mat-form-field>
+    
+        <button mat-raised-button class="w-100" color="primary" type="submit">Login</button>
+    </form>
+</div>
