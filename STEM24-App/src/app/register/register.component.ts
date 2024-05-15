@@ -36,22 +36,27 @@ export class RegisterComponent {
   password: string = '';
   passwordConfirm: string = '';
 
+  isLoading: boolean = false;
+
   register() {
+    this.isLoading = true;
     this.registerService.register({
       name: this.name,
       surname: this.surname,
-      username: this.username,
+      // username: this.username,
       email: this.email,
       password: this.password,
-      passwordConfirm: this.passwordConfirm,
+      // passwordConfirm: this.passwordConfirm,
     }).subscribe({
       next: (response) => {
+        this.isLoading = false;
         this.msg.open(
           'Registration successful. Please check your email to confirm your account.',
         );
         this.router.navigate(['/login']);
       },
       error: (error) => {
+        this.isLoading = false;
         this.errorHandler.handleError(error);
       }
     });

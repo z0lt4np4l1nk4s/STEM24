@@ -1,26 +1,19 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { AppMaterialModule } from '../../../app-material.module';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { EventsService } from '../events/service/events.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { EventsService } from '../events/service/events.service';
 import { ErrorHandlerService } from '../services/error-handler/error-handler.service';
 import { MsgDialogService } from '../services/msg-dialog/msg-dialog.service';
 import { SnackBarService } from '../services/snack-bar/snack-bar.service';
 
 @Component({
-  selector: 'app-upsert-event',
+  selector: 'app-event-details',
   standalone: true,
-  imports: [
-    CommonModule,
-    AppMaterialModule,
-    FormsModule,
-  ],
-  templateUrl: './upsert-event.component.html',
-  styleUrl: './upsert-event.component.scss'
+  imports: [],
+  templateUrl: './event-details.component.html',
+  styleUrl: './event-details.component.scss'
 })
-export class UpsertEventComponent {
+export class EventDetailsComponent implements OnInit {
   constructor(
     private eventsService: EventsService,
     private router: Router,
@@ -28,5 +21,9 @@ export class UpsertEventComponent {
     private snackbar: SnackBarService,
     private dialog: MatDialog,
     private msg: MsgDialogService
-  ) {}
+  ) { }
+
+  ngOnInit(): void {
+      
+  }
 }

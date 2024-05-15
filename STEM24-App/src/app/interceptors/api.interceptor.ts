@@ -14,25 +14,7 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
     const isTokenValid = authService.isTokenValid();
 
     if (!isTokenValid) {
-
-      // check if the refresh token is still valid
-      const isRefreshTokenValid = authService.isRefreshTokenValid();
-      if(!isRefreshTokenValid) {
-        authService.logout();
-        return next(req);
-      }
-
-      // refresh the refresh token
-      authService.refreshToken().subscribe(
-        (response) => {
-          authService.saveTokens(response);
-          token = response.access_token;
-        },
-        (error) => {
-          errorHandler.handleError(error);
-          authService.logout();
-        }
-      );
+      authService.logout();
     }
   }
 
@@ -40,7 +22,7 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
 
   const apiReq = req.clone({
     url,
-    withCredentials: true,
+    // withCredentials: true,
     setHeaders: {
       Authorization: `Bearer ${token}`
     }

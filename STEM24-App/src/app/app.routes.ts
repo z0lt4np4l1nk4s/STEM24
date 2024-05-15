@@ -4,8 +4,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { authGuard } from './guards/auth/auth.guard';
 import { RegisterComponent } from './register/register.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
-import { EventsComponent } from './events/events.component';
-import { UpsertEventComponent } from './upsert-event/upsert-event.component';
+import { EventsComponent } from './events/events/events.component';
+import { UpsertEventComponent } from './events/upsert-event/upsert-event.component';
+import { loginGuard } from './guards/login/login.guard';
+import { EventDetailsComponent } from './event-details/event-details.component';
 
 export const routes: Routes = [
     {
@@ -16,7 +18,7 @@ export const routes: Routes = [
 
     // events routes
     {
-        // canActivate: [authGuard],
+        canActivate: [authGuard],
         path: 'events',
         component: DashboardComponent,
         children: [
@@ -29,6 +31,11 @@ export const routes: Routes = [
                 component: UpsertEventComponent
             },
             {
+                path: ':id',
+                component: EventDetailsComponent
+            },
+            
+            {
                 path: 'update/:id',
                 component: UpsertEventComponent
             }
@@ -37,14 +44,17 @@ export const routes: Routes = [
 
     // auth routes
     {
+        // canActivate: [loginGuard],
         path: 'login',
         component: LoginComponent,
     },
     {
+        // canActivate: [loginGuard],
         path: 'register',
         component: RegisterComponent,
     },
     {
+        // canActivate: [loginGuard],
         path: 'password-reset',
         component: PasswordResetComponent,
     },

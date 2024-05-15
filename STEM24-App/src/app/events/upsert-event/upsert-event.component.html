@@ -1,0 +1,195 @@
+<div class="body-container">
+    <mat-horizontal-stepper #stepper>
+      <!-- Step 1 -->
+      <mat-step>
+        <ng-template matStepLabel>Step 1</ng-template>
+
+        <div style="text-align: center;">
+            <h1>Create an event</h1>
+            <p>Step 1/2</p>
+        </div>
+
+        <form #step1Form="ngForm" style="margin-top:50px">
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Name</mat-label>
+            <input matInput name="name" [(ngModel)]="name" required placeholder="Name">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Affected Brand</mat-label>
+            <input matInput name="affectedBrand" [(ngModel)]="affectedBrand" required placeholder="Affected Brand">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Matching Keywords (press enter to add a keyword)</mat-label>
+            <input matInput #keywordsInput name="keywords" [(ngModel)]="keyword" (keydown.enter)="addKeyword()">
+          </mat-form-field>
+
+          <mat-chip-set>
+            <mat-chip *ngFor="let keyword of keywords; let i = index" (removed)="removeKeyword(i)">
+              {{ keyword }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-set>
+
+          <div style="height: 20px;"></div>
+  
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Description</mat-label>
+            <textarea matInput name="description" [(ngModel)]="description" required placeholder="Description"></textarea>
+          </mat-form-field>
+  
+          <mat-radio-group name="status" [(ngModel)]="status" class="statuses" required>
+            <mat-label>Status: </mat-label>
+            <mat-radio-button value="todo">To Do</mat-radio-button>
+            <mat-radio-button value="inprogress">In Progress</mat-radio-button>
+            <mat-radio-button value="done">Done</mat-radio-button>
+          </mat-radio-group>
+        </form>
+        <div class="next-button">
+          <button mat-raised-button color="primary" [disabled]="step1Form.invalid" matStepperNext>Next</button>
+        </div>
+      </mat-step>
+  
+      <!-- Step 2 -->
+      <mat-step>
+        <ng-template matStepLabel>Step 2</ng-template>
+
+        <div style="text-align: center;">
+            <h1>Create an event</h1>
+            <p>Step 2/2</p>
+        </div>
+        
+
+        <form #step2Form="ngForm" style="margin-top:50px">
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Malicious URL</mat-label>
+            <input matInput name="maliciousUrl" [(ngModel)]="maliciousUrl" required placeholder="Malicious URL">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" class="input">
+            <mat-label>Malicious Domain Registration Date</mat-label>
+            <input matInput name="registrationDate" [(ngModel)]="maliciousDomainRegistrationDate" required placeholder="Registration Date" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+  
+          <!-- A Record Table -->
+          <div class="record-table">
+            <h2 style="font-weight: 600 !important;">A RECORDS</h2>
+
+              <!-- Table for A Records -->
+              @if(aRecords.length > 0) {
+                <table mat-table [dataSource]="aRecords">
+                  <!-- Define columns -->
+                  <ng-container matColumnDef="ipAddress">
+                    <th mat-header-cell *matHeaderCellDef> IP Address </th>
+                    <td mat-cell *matCellDef="let record"> {{ record.ip }} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="host">
+                    <th mat-header-cell *matHeaderCellDef> Host </th>
+                    <td mat-cell *matCellDef="let record"> {{ record.host }} </td>
+                  </ng-container>
+                  <!-- Define row -->
+                  <tr mat-header-row *matHeaderRowDef="['ipAddress', 'host']"></tr>
+                  <tr mat-row *matRowDef="let record; columns: ['ipAddress', 'host'];"></tr>
+                </table>
+              }
+              
+
+              <form #aForm="ngForm" class="form-row">
+                <mat-form-field appearance="fill" class="input">
+                  <mat-label>Host</mat-label>
+                  <input matInput name="host" [(ngModel)]="aHost" required placeholder="HOST">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="input">
+                  <mat-label>IP Address</mat-label>
+                  <input [(ngModel)]="aIp" matInput name="ipAddress" required placeholder="IP Address">
+                </mat-form-field>
+              </form>
+            
+            <button type="button" (click)="addARecord()" [disabled]="aForm.invalid" mat-raised-button color="primary" >Add New Record</button>
+
+            
+          </div>
+  
+          <!-- NS Record Table -->
+          <div class="record-table">
+            <h2 style="font-weight: 600 !important;">NS RECORDS</h2>
+
+            <!-- Table for NS Records -->
+            @if (nsRecords.length > 0) {
+              <table mat-table [dataSource]="nsRecords">
+                <!-- Define columns -->
+                <ng-container matColumnDef="nameserver">
+                  <th mat-header-cell *matHeaderCellDef> Nameserver </th>
+                  <td mat-cell *matCellDef="let record"> {{ record.nameserver }} </td>
+                </ng-container>
+                <!-- Define row -->
+
+                  <tr mat-header-row *matHeaderRowDef="['nameserver']"></tr>
+
+                <tr mat-row *matRowDef="let record; columns: ['nameserver'];"></tr>
+              </table>
+            }
+            
+            
+            <form #nsForm="ngForm" class="form-row">
+                <mat-form-field appearance="fill" class="input">
+                  <mat-label>Nameserver 1</mat-label>
+                  <input [(ngModel)]="nsNameserver" matInput name="host" required placeholder="Nameserver 1">
+                </mat-form-field>
+            </form>
+            <button type="button" (click)="addNsRecord()" mat-raised-button [disabled]="nsForm.invalid" color="primary" >Add New Record</button>
+
+            
+          </div>
+  
+          <!-- MX Record Table -->
+          <div class="record-table">
+            <h2 style="font-weight: 600 !important;">MX RECORDS</h2>
+
+            <!-- Table for MX Records -->
+            @if(mxRecords.length > 0) {
+              <table mat-table [dataSource]="mxRecords">
+                <!-- Define columns -->
+                <ng-container matColumnDef="mailServer">
+                  <th mat-header-cell *matHeaderCellDef> Mail Server </th>
+                  <td mat-cell *matCellDef="let record"> {{ record.mailServer }} </td>
+                </ng-container>
+                <ng-container matColumnDef="priority">
+                  <th mat-header-cell *matHeaderCellDef> Priority </th>
+                  <td mat-cell *matCellDef="let record"> {{ record.priority }} </td>
+                </ng-container>
+                <!-- Define row -->
+  
+                <tr mat-header-row *matHeaderRowDef="['mailServer', 'priority']"></tr>
+                <tr mat-row *matRowDef="let record; columns: ['mailServer', 'priority'];"></tr>
+              </table>
+            }
+            
+
+            <form #mxForm="ngForm" class="form-row">
+                <mat-form-field appearance="fill" class="input">
+                  <mat-label>Mail server</mat-label>
+                  <input type="text" [defaultValue]="" [(ngModel)]="mxMailServer" matInput name="host" required placeholder="Mail server">
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="input">
+                  <mat-label>Priority</mat-label>
+                  <input [(ngModel)]="mxPriority" type="number" matInput name="host" required placeholder="Priority">
+                </mat-form-field>
+            </form>
+          
+            <button type="button" (click)="addMxRecord()" mat-raised-button [disabled]="mxForm.invalid" color="primary">Add New Record</button>
+
+            
+          </div>
+        </form>
+        <div class="step-buttons">
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" [disabled]="step2Form.invalid" (click)="onSubmit()">Submit</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+    

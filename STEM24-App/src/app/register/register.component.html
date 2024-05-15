@@ -3,7 +3,9 @@
     <h2>Already have an account? <a routerLink="/login">Log in</a></h2>
 
     <form #registerForm="ngForm" class="login-form" (ngSubmit)="register()">
-
+        @if(isLoading) {
+            <mat-progress-bar mode="indeterminate"/>
+        }
         <div class="form-row">
             <mat-form-field class="flex-1">
                 <mat-label>Name</mat-label>
@@ -17,10 +19,10 @@
         </div>
         
 
-        <mat-form-field class="w-100">
+        <!-- <mat-form-field class="w-100">
             <mat-label>Username</mat-label>
             <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field class="w-100">
             <mat-label>E-mail</mat-label>
@@ -32,11 +34,11 @@
             <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password" required>
         </mat-form-field>
 
-        <mat-form-field class="w-100">
+        <!-- <mat-form-field class="w-100">
             <mat-label>Confirm Password</mat-label>
             <input matInput placeholder="Confirm Password" [(ngModel)]="passwordConfirm" name="passwordConfirm" type="password" required>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <button mat-raised-button class="w-100" color="primary" type="submit">Register</button>
+        <button [disabled]="registerForm.invalid" mat-raised-button class="w-100" color="primary" type="submit">Register</button>
     </form>
 </div>

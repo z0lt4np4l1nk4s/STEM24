@@ -12,7 +12,7 @@ export class RegisterService {
   ) { }
 
   register(data: RegisterRequest) {
-    return this.http.post('register', data).pipe(
+    return this.http.post('auth/register', data).pipe(
       map((response: any) => {
         return response;
       })
@@ -24,8 +24,6 @@ export class RegisterService {
 export type RegisterRequest = {
   name: string;
   surname: string;
-  username: string;
   email: string;
   password: string;
-  passwordConfirm: string;
 };

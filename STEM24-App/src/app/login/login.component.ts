@@ -25,21 +25,28 @@ export class LoginComponent {
     private errorHandler: ErrorHandlerService,
     private router: Router
   ) {}
-
+  
+  isLoading = false;
   loginForm!: NgForm;
 
   email: string = '';
   password: string = '';
 
   login(): void {
+    this.isLoading = true;
     this.authService.login({ email: this.email, password: this.password }).subscribe(
-      (response) => {
-        this.authService.saveTokens(response);
-        this.router.navigate(['/events']);
-      },
-      (error) => {
-        this.errorHandler.handleError(error);
+      {
+        next: (response) => {
+          this.authService.saveTokens(response);
+          this.isLoading = false;
+          this.router.navigate(['/events']);
+        },
+        error: (error) => {
+          this.isLoading=false;
+          this.errorHandler.handleError(error);
+        }
       }
+      
     );
   }
 }
