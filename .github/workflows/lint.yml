@@ -25,9 +25,10 @@ jobs:
       run: npm install @microsoft/eslint-formatter-sarif
     - name: Change dir
       run: cd STEM24-App/
+    - name: mkdir
+      run: mkdir sarif-files
     - name: Lint
-      run: ng lint --format @microsoft/eslint-formatter-sarif
-          --output-file sarif-files/lint.sarif
+      run: ng lint --format @microsoft/eslint-formatter-sarif --output-file sarif-files/lint.sarif
       continue-on-error: true
 
     - name: Upload analysis results to GitHub
