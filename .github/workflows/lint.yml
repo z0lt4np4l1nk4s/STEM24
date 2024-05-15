@@ -40,7 +40,7 @@ jobs:
     - name: Upload analysis results to GitHub
       uses: github/codeql-action/upload-sarif@v3
       with:
-        sarif_file: lint.sarif
+        sarif_file: ./STEM24-App/lint.sarif
 
     
     
