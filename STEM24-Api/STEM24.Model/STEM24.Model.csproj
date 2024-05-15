@@ -10,8 +10,4 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.30" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dto\DnsRecord\" />
-  </ItemGroup>
-
 </Project>

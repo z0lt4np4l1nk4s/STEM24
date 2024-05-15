@@ -1,12 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace STEM24.Model.Dto;
 
-namespace STEM24.Model.Dto.Comment
+/// <summary>
+/// Add comment model
+/// </summary>
+public class AddCommentDto
 {
-    internal class AddCommentDto
-    {
-    }
+    /// <summary>
+    /// User identifier
+    /// </summary>
+    public Guid UserId { get; set; }
+
+    /// <summary>
+    /// Event identifier
+    /// </summary>
+    [Required]
+    public Guid EventId { get; set; }
+
+    /// <summary>
+    /// Text
+    /// </summary>
+    [Required]
+    public string Text { get; set; } = default!;
 }

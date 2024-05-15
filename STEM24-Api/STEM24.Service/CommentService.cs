@@ -1,17 +1,69 @@
-﻿using MapsterMapper;
-using STEM24.Abstractions.Repository;
-using STEM24.Model.Entity;
+﻿namespace STEM24.Service;
 
-namespace STEM24.Service;
-
-public class CommentService
+/// <inheritdoc cref="ICommentService" />
+public class CommentService : ICommentService
 {
     private readonly IGenericRepository<CommentEntity> _repository;
     private readonly IMapper _mapper;
 
-    public CommentService(IMapper mapper, IGenericRepository<CommentEntity> repository)
+    public CommentService(IGenericRepository<CommentEntity> repository, IMapper mapper)
     {
-        _mapper = mapper;
         _repository = repository;
+        _mapper = mapper;
+    }
+
+    public async Task<ServiceResult> AddAsync(AddCommentDto model)
+    {
+        var entity = _mapper.Map<CommentEntity>(model);
+
+        entity.UpdateTime = entity.CreationTime = DateTime.UtcNow;
+
+        var result = await _repository.AddAsync(entity);
+
+        return result;
+    }
+
+    public async Task<ServiceResult> UpdateAsync(Guid id, UpdateCommentDto model)
+    {
+        var entity = await _repository.GetByIdAsync(id);
+
+        if (entity == null)
+        {
+            return ServiceResult.Failure("Comment does not exist.");
+        }
+
+        if (entity.UserId != model.UserId)
+        {
+            return ServiceResult.Failure("No permission to edit this comment.");
+        }
+
+        entity.Text = model.Text;
+        entity.UpdateTime = DateTime.UtcNow;
+
+        await _repository.SaveChangesAsync();
+
+        return ServiceResult.Success();
+    }
+
+    public async Task<List<CommentDto>> GetPagedAsync(CommentFilter filter)
+    {
+        var commentsQueryable = _repository.GetAll().Where(x => x.EventId == filter.EventId).OrderByDescending(x => x.CreationTime);
+
+        var totalCount = await commentsQueryable.CountAsync();
+
+        var comments = commentsQueryable.Skip((filter.PageNumber - 1) * filter.PageSize).Take(filter.PageSize).ToList();
+
+        var mappedComments = _mapper.Map<List<CommentDto>>(comments);
+
+        var pagedList = new PagedList<CommentDto>
+        {
+            Items = mappedComments,
+            TotalCount = totalCount,
+            PageSize = filter.PageSize,
+            PageNumber = filter.PageNumber,
+            LastPage = (int)Math.Ceiling(1.0 * totalCount / filter.PageSize)
+        };
+
+        return mappedComments;
     }
 }

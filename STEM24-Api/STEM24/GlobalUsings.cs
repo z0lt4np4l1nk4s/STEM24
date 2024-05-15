@@ -12,3 +12,4 @@ global using MapsterMapper;
 global using Microsoft.IdentityModel.Tokens;
 global using System.IdentityModel.Tokens.Jwt;
 global using STEM24.Extensions;
+global using STEM24.Model.Filter;

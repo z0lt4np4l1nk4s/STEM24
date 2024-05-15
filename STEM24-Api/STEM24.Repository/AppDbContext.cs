@@ -4,14 +4,19 @@ using STEM24.Model.Entity;
 
 namespace STEM24.Repository;
 
-public class AppDbContext : IdentityDbContext
+public class AppDbContext : IdentityDbContext<UserEntity, RoleEntity, Guid>
 {
     public AppDbContext(DbContextOptions<AppDbContext> options)
-    : base(options)
+        : base(options)
     {
     }
 
-    public DbSet<UserEntity> Users { get; set; } = default!;
     public DbSet<CommentEntity> Comments { get; set; } = default!;
     public DbSet<EventEntity> Events { get; set; } = default!;
+    public DbSet<DnsRecordEntity> DnsRecords { get; set; } = default!;
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+    }
 }

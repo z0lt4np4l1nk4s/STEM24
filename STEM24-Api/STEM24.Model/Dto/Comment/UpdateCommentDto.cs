@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace STEM24.Model.Dto;
 
-namespace STEM24.Model.Dto.Comment
+/// <summary>
+/// Update comment model
+/// </summary>
+public class UpdateCommentDto
 {
-    internal class UpdateCommentDto
-    {
-    }
+    /// <summary>
+    /// User identifier
+    /// </summary>
+    public Guid UserId { get; set; }
+
+    /// <summary>
+    /// Text
+    /// </summary>
+    [Required]
+    public string Text { get; set; } = default!;
 }

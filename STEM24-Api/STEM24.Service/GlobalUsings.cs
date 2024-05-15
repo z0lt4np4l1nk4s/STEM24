@@ -1,2 +1,9 @@
 ﻿global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore;
+global using MapsterMapper;
+global using STEM24.Abstractions.Repository;
+global using STEM24.Model.Entity;
+global using STEM24.Model.Filter;
+global using STEM24.Model.Dto;
+global using STEM24.Model.Enum;
+global using Mapster;

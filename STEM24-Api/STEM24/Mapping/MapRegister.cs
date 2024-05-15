@@ -5,9 +5,12 @@ public class MapRegister : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<AddEventDto, EventEntity>()
-            .Map(destination => destination.MatchingKeywords, source => string.Join(";", source.MatchingKeywords));
+            .Map(destination => destination.Keywords, source => string.Join(";", source.Keywords));
 
         config.NewConfig<EventEntity, EventDto>()
-            .Map(destination => destination.MatchingKeywords, source => string.IsNullOrEmpty(source.MatchingKeywords) ? new List<string>() : source.MatchingKeywords.Split(";", StringSplitOptions.RemoveEmptyEntries).ToList());
+            .Map(destination => destination.Keywords, source => string.IsNullOrEmpty(source.Keywords) ? new List<string>() : source.Keywords.Split(";", StringSplitOptions.RemoveEmptyEntries).ToList());
+
+        config.NewConfig<EventEntity, UpdateEventDto>()
+            .Map(destination => destination.Keywords, source => string.Join(";", source.Keywords));
     }
 }

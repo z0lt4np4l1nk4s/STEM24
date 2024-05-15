@@ -1,14 +1,14 @@
-﻿namespace STEM24.Model.Entity;
+﻿namespace STEM24.Model.Dto;
 
 /// <summary>
-/// Dns record entity
+/// Dns record model
 /// </summary>
-public class DnsRecordEntity
+public class DnsRecordDto
 {
     /// <summary>
     /// Identifier
     /// </summary>
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid Id { get; set; }
 
     /// <summary>
     /// Type

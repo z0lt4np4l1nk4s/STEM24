@@ -1,6 +1,6 @@
 ﻿namespace STEM24.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/auth")]
 [ApiController]
 public class AuthController : ControllerBase
 {
@@ -52,7 +52,9 @@ public class AuthController : ControllerBase
         {
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
-                return ServiceResult.Failure("User already exists!").ToActionResult();
+            {
+                return ServiceResult.Failure("User already exists.").ToActionResult();
+            }
 
             UserEntity user = new()
             {
@@ -70,7 +72,7 @@ public class AuthController : ControllerBase
                 return ServiceResult.Success().ToActionResult();
             }
 
-            return ServiceResult.Failure(string.Join(", ", result.Errors.Select(x => x.Description))).ToActionResult();
+            return ServiceResult.Failure(result.Errors.Select(x => x.Description).ToList()).ToActionResult();
         }
 
         return ServiceResult.Failure("User registration failed! Please check user details and try again.").ToActionResult();
