@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: Node.js CI
+name: Lint
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  lint-frontend:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,10 +20,22 @@ jobs:
       with:
         node-version: "18.x"
     - name: Install Angular cli
-      run: npm i -g @angular/cli
+      run: npm i -g @angular/cli 
+    - name: Install sarif formatter
+      run: npm install @microsoft/eslint-formatter-sarif
     - name: Change dir
       run: cd STEM24-App/
     - name: Lint
-      run: ng lint
+      run: ng lint --format @microsoft/eslint-formatter-sarif
+          --output-file sarif-files/lint.sarif
+      continue-on-error: true
+
+    - name: Upload analysis results to GitHub
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: sarif-files/lint.sarif
+        wait-for-processing: true
+
+    
     
     
