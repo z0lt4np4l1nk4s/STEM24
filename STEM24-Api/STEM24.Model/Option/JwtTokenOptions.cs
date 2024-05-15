@@ -1,7 +1,7 @@
 ﻿namespace STEM24.Model.Option;
 
 /// <summary>
-/// Jow token options
+/// Jwt token options
 /// </summary>
 public class JwtTokenOptions
 {
