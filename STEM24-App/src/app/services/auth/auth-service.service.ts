@@ -11,15 +11,19 @@ import { Router } from '@angular/router';
 export class AuthService {
   API_URL: string = environment.API_URL;
   private access = 'access-token';
+  private expiration = 'expiration';
+  private userId = 'user_id';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: any): Observable<any> {
-    return this.http.post<any>(`login`, credentials);
+    return this.http.post<any>(`auth/login`, credentials);
   }
 
   logout(): void {
     localStorage.removeItem(this.access);
+    localStorage.removeItem(this.expiration);
+    localStorage.removeItem(this.userId);
 
     this.router.navigate(['/login']);
   }
@@ -29,7 +33,7 @@ export class AuthService {
     if (!token) {
       return false;
     }
-    const tokenExpiration = this.decodeToken(token).exp * 1000;
+    const tokenExpiration = this.getTokenExpiration();
     const now = new Date().getTime();
     return tokenExpiration > now;
   }
@@ -45,14 +49,19 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem(this.access);
   }
+  getTokenExpiration(): number {
+    const exp = localStorage.getItem(this.expiration);
+    if(!exp) return 0
+    return Date.parse(exp);
+  }
 
   saveTokens(tokens: any): void {
-    localStorage.setItem(this.access, tokens.access_token);
+    localStorage.setItem(this.access, tokens.token);
+    localStorage.setItem(this.expiration, tokens.expiration)
+    localStorage.setItem(this.userId, tokens.user_id)
   }
 
   decodeToken(token: string): any {
     return jwtDecode(token);
   }
-
-  
 }

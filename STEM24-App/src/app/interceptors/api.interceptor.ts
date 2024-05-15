@@ -22,7 +22,7 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
 
   const apiReq = req.clone({
     url,
-    withCredentials: true,
+    // withCredentials: true,
     setHeaders: {
       Authorization: `Bearer ${token}`
     }

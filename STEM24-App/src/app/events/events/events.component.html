@@ -36,11 +36,6 @@
                         Clear
                     </button>
                 </div>
-                <div class="flex-column">
-                    <mat-checkbox [(ngModel)]="todoStatusChecked" color="primary">To Do</mat-checkbox>
-                    <mat-checkbox [(ngModel)]="inProgressStatusChecked" color="primary">In Progress</mat-checkbox>
-                    <mat-checkbox [(ngModel)]="doneStatusChecked" color="primary">Done</mat-checkbox>
-                </div>
                 
                 
             </div>
@@ -66,7 +61,7 @@
                 mat-flat-button
                 class="w-100"
                 color="primary"
-                (click)="applyFilters()"
+                (click)="fetchData()"
                 style="margin-top: 20px;"
             >
                 Apply filters
@@ -79,7 +74,16 @@
             @for (event of events; track event;) {
                 <app-event-card [event]="event"/>
             }
-            
+
+            <mat-paginator #paginator
+              [pageSize]="perPage"
+              [pageSizeOptions]="pageSizeOptions"
+              aria-label="Select page">
+            </mat-paginator>
         </div>
+
+        
+
+
     </div>
 </div>

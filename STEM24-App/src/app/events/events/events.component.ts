@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { EventListItem, EventsService } from '../service/events.service';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from '../../services/error-handler/error-handler.service';
@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { AppMaterialModule } from '../../../../app-material.module';
 import { FormsModule } from '@angular/forms';
 import { EventCardComponent } from '../../event-card/event-card.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-events',
@@ -22,7 +23,7 @@ import { EventCardComponent } from '../../event-card/event-card.component';
   templateUrl: './events.component.html',
   styleUrl: './events.component.scss'
 })
-export class EventsComponent implements OnInit {
+export class EventsComponent implements OnInit, AfterViewInit {
   constructor(
     private eventsService: EventsService,
     private router: Router,
@@ -31,6 +32,8 @@ export class EventsComponent implements OnInit {
     private dialog: MatDialog,
     private msg: MsgDialogService
   ) { }
+
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
   
   // filters
   search: string = '';
@@ -38,6 +41,17 @@ export class EventsComponent implements OnInit {
   todoStatusChecked: boolean = false;
   inProgressStatusChecked: boolean = false;
   doneStatusChecked: boolean = false;
+
+  page: number = 1;
+  perPage: number = 10;
+  pageSizeOptions: number[] = [10, 20, 50, 100];
+  
+  ngAfterViewInit(): void {
+    this.paginator?.page.subscribe(() => {
+      window.scroll(0, 0);
+      this.fetchData();
+    });
+  }
 
   events: EventListItem[] = [
     {
@@ -57,7 +71,26 @@ export class EventsComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-      // TODO
+    // this.fetchData()
+  }
+
+  preProcessFilters() {
+    return {
+      query: !!this.search ? this.search : undefined,
+      date: !!this.date ? this.date : undefined,
+    }
+  }
+
+  fetchData() {
+    const filters = this.preProcessFilters();
+    this.eventsService.getEvents(filters, this.page, this.perPage).subscribe({
+      next: (data : any) => {
+        this.events = data;
+      },
+      error: (error: any) => {
+        this.errorHandler.handleError(error);
+      }
+    });
   }
 
   clearEventStatuses() {
@@ -72,9 +105,5 @@ export class EventsComponent implements OnInit {
 
   clearDate() {
     this.date = '';
-  }
-
-  applyFilters() {
-    // TODO
   }
 }
