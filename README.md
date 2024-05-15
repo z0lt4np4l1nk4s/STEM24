@@ -57,3 +57,7 @@ It's worth noting that the snyk workflow runs every Sunday because new vulnerabi
 All of the vulnerabilities end up in the security tab, under code scanning.
 
 ![Code scanning](https://github.com/z0lt4np4l1nk4s/STEM24/blob/readme/screenshots/Slika%20zaslona%202024-05-15%20u%2021.25.06.png?raw=true)
+
+## Leftover vulnerabilities
+We decided not to fix System.Security.Cryptography.Xml because it's a medium vulnerability with no known way of reproduction.
+As for the lint errors, as long as the code works, they're not an issue and they should be easy to fix with adequate time.
