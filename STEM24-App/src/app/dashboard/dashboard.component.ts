@@ -5,7 +5,7 @@ import { ErrorHandlerService } from '../services/error-handler/error-handler.ser
 import { SnackBarService } from '../services/snack-bar/snack-bar.service';
 import { EventsService } from '../events/service/events.service';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { AppMaterialModule } from '../../../app-material.module';
 import { AuthService } from '../services/auth/auth-service.service';
 
@@ -16,6 +16,7 @@ import { AuthService } from '../services/auth/auth-service.service';
     CommonModule,
     RouterOutlet,
     AppMaterialModule,
+    RouterLink,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'

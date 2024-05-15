@@ -1,0 +1,30 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    margin: auto;
+  }
+  
+  .mat-horizontal-stepper {
+    width: 100%;
+  }
+  
+  .input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .step-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .record-table {
+    margin-top: 20px;
+  }
+  
+  .record-table button {
+    margin-bottom: 10px;
+  }
+  
