@@ -4,7 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth/auth-service.service';
 import { ErrorHandlerService } from '../services/error-handler/error-handler.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
   imports: [
     AppMaterialModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    RouterLink,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
