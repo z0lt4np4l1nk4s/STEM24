@@ -16,12 +16,12 @@ export class ErrorHandlerService implements ErrorHandlerService {
   handleError(error: HttpErrorResponse) {
     console.error(error);
     this.snackBar.dismiss();
-    let errorMsg = [ 'Sorry! Error occurred.', error.status + ': ' + error.statusText ];
+    const errorMsg = [ 'Sorry! Error occurred.', error.status + ': ' + error.statusText ];
     if(error.error && error.error.error && typeof error.error.error == 'string') {
       errorMsg.push(error.error.error);
     }
     else if(error.error && error.error.errors) {
-      for (const [key, value] of Object.entries(error.error.errors)) {
+      for (const [_key, value] of Object.entries(error.error.errors)) {
         errorMsg.push('' + value);
       }
     }

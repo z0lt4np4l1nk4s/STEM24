@@ -1,9 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { MsgDialogService } from '../services/msg-dialog/msg-dialog.service';
-import { PasswordResetService } from '../password-reset/service/password-reset.service';
-import { ErrorHandlerService } from '../services/error-handler/error-handler.service';
-import { SnackBarService } from '../services/snack-bar/snack-bar.service';
-import { EventsService } from '../events/service/events.service';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { AppMaterialModule } from '../../../app-material.module';

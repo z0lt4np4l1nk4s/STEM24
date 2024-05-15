@@ -17,7 +17,7 @@ export class EventsService {
     page: number,
     perPage: number
   ) {
-    let q = {
+    const q = {
       ...JSON.parse(JSON.stringify(filters)),
       pageNumber: page,
       perPage

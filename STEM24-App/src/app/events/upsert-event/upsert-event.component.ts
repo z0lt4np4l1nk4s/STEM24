@@ -4,7 +4,7 @@ import { AppMaterialModule } from '../../../../app-material.module';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CreateEventType, EventsService } from '../service/events.service';
+import { EventsService } from '../service/events.service';
 import { ErrorHandlerService } from '../../services/error-handler/error-handler.service';
 import { MsgDialogService } from '../../services/msg-dialog/msg-dialog.service';
 import { SnackBarService } from '../../services/snack-bar/snack-bar.service';

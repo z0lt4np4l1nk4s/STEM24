@@ -63,8 +63,8 @@ export class EventsComponent implements OnInit, AfterViewInit {
 
   preProcessFilters() {
     return {
-      query: !!this.search ? this.search : undefined,
-      date: !!this.date ? this.date : undefined,
+      query: this.search ? this.search : undefined,
+      date: this.date ? this.date : undefined,
     }
   }
 

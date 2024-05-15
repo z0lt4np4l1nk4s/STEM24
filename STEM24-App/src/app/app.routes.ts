@@ -6,7 +6,6 @@ import { RegisterComponent } from './register/register.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { EventsComponent } from './events/events/events.component';
 import { UpsertEventComponent } from './events/upsert-event/upsert-event.component';
-import { loginGuard } from './guards/login/login.guard';
 import { EventDetailsComponent } from './event-details/event-details.component';
 
 export const routes: Routes = [

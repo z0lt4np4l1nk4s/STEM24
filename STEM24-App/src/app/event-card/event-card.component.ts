@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AppMaterialModule } from '../../../app-material.module';
 import { CommonModule } from '@angular/common';
 import { EventListItem } from '../events/service/events.service';
