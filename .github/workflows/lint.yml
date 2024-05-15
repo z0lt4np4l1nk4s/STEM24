@@ -21,10 +21,10 @@ jobs:
         node-version: "18.x"
     - name: Install Angular cli
       run: npm i -g @angular/cli 
-    - name: Install sarif formatter
-      run: npm install @microsoft/eslint-formatter-sarif
     - name: Change dir
       run: cd STEM24-App/
+    - name: Install sarif formatter
+      run: npm install @microsoft/eslint-formatter-sarif
     - name: mkdir
       run: mkdir sarif-files
     - name: Lint
