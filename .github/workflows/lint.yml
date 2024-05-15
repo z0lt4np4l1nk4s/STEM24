@@ -19,6 +19,8 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: "18.x"
+    - name: Install Angular cli
+      run: npm i -g @angular/cli
     - name: Change dir
       run: cd STEM24-App/
     - name: Lint
