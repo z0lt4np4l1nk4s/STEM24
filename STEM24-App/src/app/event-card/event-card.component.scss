@@ -1,0 +1,39 @@
+.event-card {
+    display: flex;
+    flex-direction: row;
+    background-color: #e9e9e9;
+    padding: 20px;
+    margin-bottom: 20px;
+    }
+    
+    .event-info {
+    flex-grow: 1;
+    }
+    
+    .brand {
+        font-size: 14;
+        font-weight: 300;
+    }
+    
+    .event-title {
+        font-size: 24px !important;
+        font-weight: bold !important;
+        margin: 5px 0;
+    }
+    
+    .edit-button {
+    align-self: flex-end;
+    }
+    
+    .description {
+        font-size: 16px;
+        font-weight: 300;
+    }
+    
+    .event-edit {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+    
+    }

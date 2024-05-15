@@ -1,0 +1,24 @@
+<div class="body-container">
+    <h1>Welcome back!</h1>
+    <h2>Don't have an account?  <a routerLink="/register">Create it</a> </h2>
+
+    <form ngForm="#loginForm" class="login-form" (ngSubmit)="login()">
+        <mat-form-field class="w-100">
+            <mat-label>E-mail</mat-label>
+            <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
+        </mat-form-field>
+    
+        <mat-form-field class="w-100">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" [(ngModel)]="password" ngModel name="password" required>
+        </mat-form-field>
+        
+        <div class="w-100 flex-row" style="justify-content: flex-start; align-items: center;">
+            <button style="text-align: left; font-weight: 300;" mat-button routerLink="/password-reset">
+                Forgot password?
+            </button>
+        </div>
+        
+        <button mat-raised-button class="w-100" color="primary" type="submit">Login</button>
+    </form>
+</div>

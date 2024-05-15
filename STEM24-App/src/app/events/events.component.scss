@@ -1,0 +1,47 @@
+.body-container {
+    justify-content: flex-start;
+}
+
+.container {
+    width: 90%;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+  
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+    }
+}
+
+.filters {
+    order: 1;
+    padding: 10px;
+    flex: 1;
+}
+.filter {
+    width: 100%;
+}
+.filter-input {
+    width: 100%;
+}
+
+.events {
+    order: 2;
+    padding: 10px;
+    flex: 3;
+}
+
+
+h1 {
+    font-size: 20 !important;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 20;
+    font-weight: 600;
+}
