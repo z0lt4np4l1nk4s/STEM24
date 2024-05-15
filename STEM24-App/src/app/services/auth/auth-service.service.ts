@@ -54,6 +54,11 @@ export class AuthService {
     if(!exp) return 0
     return Date.parse(exp);
   }
+  getUserId(): string {
+    const uid = localStorage.getItem(this.userId);
+    if(!uid) return '';
+    return uid;
+  }
 
   saveTokens(tokens: any): void {
     localStorage.setItem(this.access, tokens.token);

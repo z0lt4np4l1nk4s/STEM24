@@ -2,7 +2,11 @@
 
     <div class="event-info">
         <span class="brand">{{event.affectedBrand}}</span>
-        <h2 class="event-title">{{ event.name }}</h2>
+
+        <a style="text-decoration: inherit; color: inherit;" routerLink="/event/{{event.id}}">
+            <h2 class="event-title">{{ event.name }}</h2>
+        </a>
+        
         <p class="description">{{ event.description }}</p>
         <p class="date">{{ event.date }}</p>
     </div>

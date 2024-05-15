@@ -7,6 +7,7 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
 import { EventsComponent } from './events/events/events.component';
 import { UpsertEventComponent } from './events/upsert-event/upsert-event.component';
 import { loginGuard } from './guards/login/login.guard';
+import { EventDetailsComponent } from './event-details/event-details.component';
 
 export const routes: Routes = [
     {
@@ -29,6 +30,11 @@ export const routes: Routes = [
                 path: 'create',
                 component: UpsertEventComponent
             },
+            {
+                path: ':id',
+                component: EventDetailsComponent
+            },
+            
             {
                 path: 'update/:id',
                 component: UpsertEventComponent

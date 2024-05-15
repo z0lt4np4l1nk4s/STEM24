@@ -4,10 +4,11 @@ import { AppMaterialModule } from '../../../../app-material.module';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { EventsService } from '../service/events.service';
+import { CreateEventType, EventsService } from '../service/events.service';
 import { ErrorHandlerService } from '../../services/error-handler/error-handler.service';
 import { MsgDialogService } from '../../services/msg-dialog/msg-dialog.service';
 import { SnackBarService } from '../../services/snack-bar/snack-bar.service';
+import { AuthService } from '../../services/auth/auth-service.service';
 
 @Component({
   selector: 'app-upsert-event',
@@ -23,6 +24,7 @@ import { SnackBarService } from '../../services/snack-bar/snack-bar.service';
 export class UpsertEventComponent {
   constructor(
     private eventsService: EventsService,
+    private authService: AuthService,
     private router: Router,
     private errorHandler: ErrorHandlerService,
     private snackbar: SnackBarService,
@@ -91,7 +93,21 @@ export class UpsertEventComponent {
   }
 
   onSubmit() {
-    // TODO
+    // const ADnsRecords = this.aRecords.map(record => ({
+    //   type: 'A',
+    //   name: ''
+    // }))
+    // const data: CreateEventType = {
+    //   userId: this.authService.getUserId(),
+    //   name: this.name,
+    //   affectedBrand: this.affectedBrand,
+    //   maliciousUrl: this.maliciousUrl,
+    //   domainRegistrationTime: this.maliciousDomainRegistrationDate,
+    //   keywords: this.keywords,
+    //   2
+
+    // }
+    // this.eventsService.createEvent(event: )
   }
 
 }

@@ -32,6 +32,8 @@ export class EventsComponent implements OnInit, AfterViewInit {
     private dialog: MatDialog,
     private msg: MsgDialogService
   ) { }
+  
+  isLoading = false;
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   
@@ -53,25 +55,10 @@ export class EventsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  events: EventListItem[] = [
-    {
-      id: '1',
-      affectedBrand: 'Brand 1',
-      name: 'Event 1',
-      description: 'Description 1',
-      date: '2021-01-01'
-    },
-    {
-      id: '2',
-      affectedBrand: 'Brand 2',
-      name: 'Event 2',
-      description: 'Description 2',
-      date: '2021-01-02'
-    }
-  ];
+  events: EventListItem[] = [];
 
   ngOnInit(): void {
-    // this.fetchData()
+    this.fetchData()
   }
 
   preProcessFilters() {
@@ -82,13 +69,16 @@ export class EventsComponent implements OnInit, AfterViewInit {
   }
 
   fetchData() {
+    this.isLoading = true;
     const filters = this.preProcessFilters();
     this.eventsService.getEvents(filters, this.page, this.perPage).subscribe({
       next: (data : any) => {
         this.events = data;
+        this.isLoading = false;
       },
       error: (error: any) => {
         this.errorHandler.handleError(error);
+        this.isLoading = false;
       }
     });
   }

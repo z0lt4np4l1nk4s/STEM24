@@ -8,8 +8,8 @@ export const loginGuard: CanActivateFn = (route, state) => {
   
   if (!authService.isLoggedIn()) {
     return true;
-  } else {
-    authService.logout();
+  } 
+  else {
     router.navigate(['/events']);
     return false;
   }
