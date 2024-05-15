@@ -48,9 +48,9 @@ export type CreateEventType = {
   name: string;
   affectedBrand: string;
   maliciousUrl: string;
-  domainRegistrationTime: Date;
+  domainRegistrationTime: string;
   keywords: string[];
-  dnsRecords: DnsRecord[];
+  dnsRecords: CreateEventDnsRecord[];
 }
 
 export type CreateEventDnsRecord = {

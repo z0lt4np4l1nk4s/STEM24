@@ -4,7 +4,7 @@ import { AppMaterialModule } from '../../../../app-material.module';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { CreateEventType, EventsService } from '../service/events.service';
+import { CreateEventDnsRecord, CreateEventType, EventsService } from '../service/events.service';
 import { ErrorHandlerService } from '../../services/error-handler/error-handler.service';
 import { MsgDialogService } from '../../services/msg-dialog/msg-dialog.service';
 import { SnackBarService } from '../../services/snack-bar/snack-bar.service';
@@ -93,21 +93,44 @@ export class UpsertEventComponent {
   }
 
   onSubmit() {
-    // const ADnsRecords = this.aRecords.map(record => ({
-    //   type: 'A',
-    //   name: ''
-    // }))
-    // const data: CreateEventType = {
-    //   userId: this.authService.getUserId(),
-    //   name: this.name,
-    //   affectedBrand: this.affectedBrand,
-    //   maliciousUrl: this.maliciousUrl,
-    //   domainRegistrationTime: this.maliciousDomainRegistrationDate,
-    //   keywords: this.keywords,
-    //   2
+    const ADnsRecords: CreateEventDnsRecord[] = this.aRecords.map(record => ({
+      type: 'A',
+      name: 'A',
+      content: JSON.stringify(record)
+    }))
+    const NSDnsRecords: CreateEventDnsRecord[] = this.nsRecords.map(record => ({
+      type: 'NS',
+      name: 'NS',
+      content: JSON.stringify(record)
+    }))
+    const MXDnsRecords: CreateEventDnsRecord[] = this.mxRecords.map(record => ({
+      type: 'MX',
+      name: 'MX',
+      content: JSON.stringify(record)
+    }))
+    const data: CreateEventType = {
+      userId: this.authService.getUserId(),
+      name: this.name,
+      affectedBrand: this.affectedBrand,
+      maliciousUrl: this.maliciousUrl,
+      domainRegistrationTime: this.maliciousDomainRegistrationDate,
+      keywords: this.keywords,
+      dnsRecords: [
+        ...ADnsRecords,
+        ...MXDnsRecords,
+        ...NSDnsRecords
+      ]
 
-    // }
-    // this.eventsService.createEvent(event: )
+    }
+    this.eventsService.createEvent(data).subscribe({
+      next: (data) => {
+        this.msg.open("Event successfully created");
+        this.router.navigate(['/events']);
+      },
+      error: (error: any) => {
+        this.errorHandler.handleError(error);
+      }
+    })
   }
 
 }
