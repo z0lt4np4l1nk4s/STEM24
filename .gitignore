@@ -177,3 +177,6 @@ $RECYCLE.BIN/
 *.log
 
 **/Properties/PublishProfiles/*
+
+*.sarif
+.dccache
