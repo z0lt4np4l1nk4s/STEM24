@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using STEM24.Mapping;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,14 +13,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<UserEntity, IdentityRole>(options => 
+builder.Services.AddIdentity<UserEntity, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
     options.User.RequireUniqueEmail = true;
     options.Password.RequiredLength = 8;
-    options.Password.RequireDigit = false;
-    options.Password.RequiredUniqueChars = 0;
-    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = true;
+    options.Password.RequiredUniqueChars = 1;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
 }
 )
     .AddEntityFrameworkStores<AppDbContext>()
@@ -59,12 +63,9 @@ builder.Services.AddSingleton<IMapper>(mapperConfig);
 var app = builder.Build();
 
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 
