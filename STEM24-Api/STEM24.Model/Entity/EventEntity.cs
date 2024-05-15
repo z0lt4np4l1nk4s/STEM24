@@ -8,6 +8,8 @@ public class EventEntity
 
     public string Name { get; set; } = default!;
 
+    public string Description { get; set; } = default!;
+
     public DateTime CreationTime { get; set; }
 
     public DateTime UpdateTime { get; set; }
@@ -22,5 +24,5 @@ public class EventEntity
 
     public string Keywords { get; set; } = default!;
 
-    ICollection<DnsRecordEntity> DnsRecords = default!;
+    public ICollection<DnsRecordEntity> DnsRecords { get; set; } = default!;
 }

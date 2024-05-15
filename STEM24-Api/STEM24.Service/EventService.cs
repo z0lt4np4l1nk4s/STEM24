@@ -12,6 +12,7 @@ public class EventService : IEventService
         _mapper = mapper;
     }
 
+    /// <inheritdoc cref="IEventService.AddAsync(AddEventDto)" />
     public async Task<ServiceResult> AddAsync(AddEventDto model)
     {
         try
@@ -31,6 +32,7 @@ public class EventService : IEventService
         }
     }
 
+    /// <inheritdoc cref="IEventService.UpdateAsync(Guid, UpdateEventDto)" />
     public async Task<ServiceResult> UpdateAsync(Guid id, UpdateEventDto model)
     {
         try
@@ -59,9 +61,10 @@ public class EventService : IEventService
         }
     }
 
-    public async Task<List<EventDto>> GetPagedAsync(EventFilter filter)
+    /// <inheritdoc cref="IEventService.GetPagedAsync(EventFilter)" />
+    public async Task<PagedList<EventDto>> GetPagedAsync(EventFilter filter)
     {
-        var eventQueryable = _repository.GetAll();
+        var eventQueryable = _repository.GetAll().Include(x => x.DnsRecords).AsNoTracking();
 
         if (!string.IsNullOrEmpty(filter.Query))
         {
@@ -111,9 +114,10 @@ public class EventService : IEventService
             LastPage = (int)Math.Ceiling(1.0 * totalCount / filter.PageSize)
         };
 
-        return mappedEvents;
+        return pagedList;
     }
 
+    /// <inheritdoc cref="IEventService.GetByIdAsync(Guid)" />
     public async Task<EventDto?> GetByIdAsync(Guid id)
     {
         var entity = await _repository.GetByIdAsync(id);
@@ -128,6 +132,7 @@ public class EventService : IEventService
         return mapped;
     }
 
+    /// <inheritdoc cref="IEventService.DeleteAsync(Guid)" />
     public async Task<ServiceResult> DeleteAsync(Guid id)
     {
         try

@@ -7,3 +7,8 @@ global using STEM24.Model.Filter;
 global using STEM24.Model.Dto;
 global using STEM24.Model.Enum;
 global using Mapster;
+global using System.Net.Mail;
+global using System.Net;
+global using STEM24.Model.Option;
+global using STEM24.Abstractions.Service;
+global using Microsoft.Extensions.Options;

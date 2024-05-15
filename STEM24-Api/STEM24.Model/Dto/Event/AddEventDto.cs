@@ -17,6 +17,11 @@ public class AddEventDto
     public string Name { get; set; } = default!;
 
     /// <summary>
+    /// Description
+    /// </summary>
+    public string Description { get; set; } = default!;
+
+    /// <summary>
     /// Affected brand
     /// </summary>
     [Required]

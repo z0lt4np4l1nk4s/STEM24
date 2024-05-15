@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿namespace STEM24.Controllers;
 
-namespace STEM24.Controllers;
-
+/// <summary>
+/// Auth base controller
+/// </summary>
 [ApiController]
 [Authorize]
 public class AuthBaseController : ControllerBase

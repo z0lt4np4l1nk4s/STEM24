@@ -12,6 +12,7 @@ public class CommentService : ICommentService
         _mapper = mapper;
     }
 
+    /// <inheritdoc cref="ICommentService.AddAsync(AddCommentDto)" />
     public async Task<ServiceResult> AddAsync(AddCommentDto model)
     {
         var entity = _mapper.Map<CommentEntity>(model);
@@ -23,6 +24,7 @@ public class CommentService : ICommentService
         return result;
     }
 
+    /// <inheritdoc cref="ICommentService.UpdateAsync(Guid, UpdateCommentDto)" />
     public async Task<ServiceResult> UpdateAsync(Guid id, UpdateCommentDto model)
     {
         var entity = await _repository.GetByIdAsync(id);
@@ -45,9 +47,10 @@ public class CommentService : ICommentService
         return ServiceResult.Success();
     }
 
-    public async Task<List<CommentDto>> GetPagedAsync(CommentFilter filter)
+    /// <inheritdoc cref="ICommentService.GetPagedAsync(CommentFilter)" />
+    public async Task<PagedList<CommentDto>> GetPagedAsync(CommentFilter filter)
     {
-        var commentsQueryable = _repository.GetAll().Where(x => x.EventId == filter.EventId).OrderByDescending(x => x.CreationTime);
+        var commentsQueryable = _repository.GetAll().Where(x => x.EventId == filter.EventId).OrderByDescending(x => x.CreationTime).AsNoTracking();
 
         var totalCount = await commentsQueryable.CountAsync();
 
@@ -64,6 +67,6 @@ public class CommentService : ICommentService
             LastPage = (int)Math.Ceiling(1.0 * totalCount / filter.PageSize)
         };
 
-        return mappedComments;
+        return pagedList;
     }
 }

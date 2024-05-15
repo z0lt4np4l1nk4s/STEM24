@@ -11,6 +11,16 @@ public class DnsRecordEntity
     public Guid Id { get; set; } = Guid.NewGuid();
 
     /// <summary>
+    /// Event identifier
+    /// </summary>
+    public Guid EventId { get; set; }
+
+    /// <summary>
+    /// Event
+    /// </summary>
+    public virtual EventEntity? Event { get; set; }
+
+    /// <summary>
     /// Type
     /// </summary>
     public string Type { get; set; } = default!;

@@ -16,7 +16,7 @@ public class UserLoginResponseDto
     public DateTime Expiration { get; set; }
 
     /// <summary>
-    /// Refresh token
+    /// User identifier
     /// </summary>
-    public string RefreshToken { get; set; } = default!;
+    public Guid UserId { get; set; }
 }

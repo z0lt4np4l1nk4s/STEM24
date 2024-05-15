@@ -1,13 +1,16 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Net.Http.Headers;
-using Microsoft.OpenApi.Models;
-using STEM24.Abstractions.Repository;
-using STEM24.Filter;
-using STEM24.Mapping;
-using STEM24.Repository;
-using System.Reflection;
-
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 
 // Add services to the container.
 
@@ -15,6 +18,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Jwt token options
+var _jwtTokenOptionsSection = builder.Configuration.GetSection("JwtTokenOptions");
+var _jwtTokenOptions = _jwtTokenOptionsSection.Get<JwtTokenOptions>();
+builder.Services.Configure<JwtTokenOptions>(_jwtTokenOptionsSection);
+
+//Smtp options
+var _smtpOptionsSection = builder.Configuration.GetSection("SmtpOptions");
+builder.Services.Configure<SmtpOptions>(_smtpOptionsSection);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -45,18 +57,10 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["JwtTokenOptions:Issuer"],
-        ValidAudience = builder.Configuration["JwtTokenOptions:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtTokenOptions:Key"]))
+        ValidAudience = _jwtTokenOptions.Audience,
+        ValidIssuer = _jwtTokenOptions.Issuer,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtTokenOptions.Key ?? ""))
     };
-});
-
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(
-        builder => builder.AllowAnyOrigin()
-                            .AllowAnyHeader()
-                            .AllowAnyMethod());
 });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -80,7 +84,6 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlPath);
 });
 
-
 //Mapster
 var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
 typeAdapterConfig.Scan(typeof(MapRegister).Assembly);
@@ -90,9 +93,12 @@ builder.Services.AddSingleton<IMapper>(mapperConfig);
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<ISmtpService, SmtpService>();
 
 
 var app = builder.Build();
+
+app.UseCors();
 
 
 app.UseSwagger();
@@ -101,9 +107,6 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
-// Configure the HTTP request pipeline.
 app.UseAuthentication();
 app.UseAuthorization();
 
