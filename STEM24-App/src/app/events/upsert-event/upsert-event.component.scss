@@ -1,0 +1,53 @@
+.body-container {
+  margin-top: 70px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    margin: auto;
+  }
+  
+  .mat-horizontal-stepper {
+    width: 100%;
+  }
+  
+  .input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .statuses {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .step-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .next-button {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .record-table {
+    margin-top: 20px;
+  }
+  
+  .record-table button {
+    margin-bottom: 10px;
+  }
+  ::ng-deep .mat-horizontal-stepper-header-container {
+    display: none !important;
+  }
+.text-container {
+  text-align: center;
+  margin-bottom: 30px !important;
+}    

@@ -4,8 +4,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { authGuard } from './guards/auth/auth.guard';
 import { RegisterComponent } from './register/register.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
-import { EventsComponent } from './events/events.component';
-import { UpsertEventComponent } from './upsert-event/upsert-event.component';
+import { EventsComponent } from './events/events/events.component';
+import { UpsertEventComponent } from './events/upsert-event/upsert-event.component';
 
 export const routes: Routes = [
     {

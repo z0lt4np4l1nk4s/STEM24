@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { EventListItem, EventsService } from './service/events.service';
+import { EventListItem, EventsService } from '../service/events.service';
 import { Router } from '@angular/router';
-import { ErrorHandlerService } from '../services/error-handler/error-handler.service';
-import { SnackBarService } from '../services/snack-bar/snack-bar.service';
+import { ErrorHandlerService } from '../../services/error-handler/error-handler.service';
+import { SnackBarService } from '../../services/snack-bar/snack-bar.service';
 import { MatDialog } from '@angular/material/dialog';
-import { MsgDialogService } from '../services/msg-dialog/msg-dialog.service';
+import { MsgDialogService } from '../../services/msg-dialog/msg-dialog.service';
 import { CommonModule } from '@angular/common';
-import { AppMaterialModule } from '../../../app-material.module';
+import { AppMaterialModule } from '../../../../app-material.module';
 import { FormsModule } from '@angular/forms';
-import { EventCardComponent } from '../event-card/event-card.component';
+import { EventCardComponent } from '../../event-card/event-card.component';
 
 @Component({
   selector: 'app-events',
