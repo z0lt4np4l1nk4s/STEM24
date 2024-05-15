@@ -21,21 +21,22 @@ jobs:
         node-version: "18.x"
     - name: Install Angular cli
       run: npm i -g @angular/cli 
-    - name: Change dir
-      run: cd STEM24-App/
     - name: Nmp ci
+      working-directory: ./STEM24-App/
       run: npm ci
     - name: Install sarif formatter
+      working-directory: ./STEM24-App/
       run: npm install @microsoft/eslint-formatter-sarif
     - name: Lint
+      working-directory: ./STEM24-App/
       run: ng lint --format @microsoft/eslint-formatter-sarif
-          --output-file sarif-files/lint.sarif STEM24-App
+          --output-file lint.sarif
       continue-on-error: true
 
     - name: Upload analysis results to GitHub
       uses: github/codeql-action/upload-sarif@v3
       with:
-        sarif_file: sarif-files/lint.sarif
+        sarif_file: STEM24-App/lint.sarif
         wait-for-processing: true
 
     
