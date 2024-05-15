@@ -28,7 +28,7 @@ permissions:
   contents: read
 
 jobs:
-  snyk:
+  snyk-backend:
     permissions:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
@@ -36,12 +36,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - name: Set up Snyk CLI to check for security issues
+        # Snyk can be used to break the build when it detects security issues.
+        # In this case we want to upload the SAST issues to GitHub Code Scanning
+        uses: snyk/actions/setup@806182742461562b67788a64410098c9d9b96adb
+
+        # For Snyk Open Source you must first set up the development environment for your application's dependencies
+        # For example for Node
+        #- uses: actions/setup-node@v3
+        #  with:
+        #    node-version: 16
+
+        env:
+          # This is where you will need to introduce the Snyk API token created with your Snyk account
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
@@ -71,11 +81,62 @@ jobs:
       - name: Snyk test
         run: snyk test --sarif --severity-threshold=low STEM24-Api/STEM24/ > sarif-files/snyk.sarif || true
 
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v4
+       # Push the Snyk Code results into GitHub Code Scanning tab
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v3
         with:
-          name: sarif-files
-          path: sarif-files
+          sarif_file: sarif-files/snyk-code.sarif
+
+      - name: Upload result to GitHub Code Scanning (snyk test)
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: sarif-files/snyk.sarif
+
+  snyk-frontend:
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Snyk CLI to check for security issues
+        # Snyk can be used to break the build when it detects security issues.
+        # In this case we want to upload the SAST issues to GitHub Code Scanning
+        uses: snyk/actions/setup@806182742461562b67788a64410098c9d9b96adb
+
+        # For Snyk Open Source you must first set up the development environment for your application's dependencies
+        # For example for Node
+        #- uses: actions/setup-node@v3
+        #  with:
+        #    node-version: 16
+
+        env:
+          # This is where you will need to introduce the Snyk API token created with your Snyk account
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+
+      - name: Set up snyk
+        run: npm i -g snyk
+
+      - name: Snyk auth
+        env:
+          # This is where you will need to introduce the Snyk API token created with your Snyk account
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk auth $SNYK_TOKEN
+
+      - name: mkdir sarif-files
+        run: mkdir sarif-files
+
+        # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
+        # Use || true to not fail the pipeline
+      - name: Snyk Code test
+        run: snyk code test --sarif --severity-threshold=low STEM24-App/ > sarif-files/snyk-code.sarif || true
+
+      - name: Snyk test
+        run: snyk test --sarif --severity-threshold=low STEM24-App/ > sarif-files/snyk.sarif || true
 
        # Push the Snyk Code results into GitHub Code Scanning tab
       - name: Upload result to GitHub Code Scanning
@@ -87,3 +148,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: sarif-files/snyk.sarif
+
