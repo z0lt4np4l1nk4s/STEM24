@@ -29,14 +29,18 @@ jobs:
       run: npm install @microsoft/eslint-formatter-sarif
     - name: Lint
       working-directory: ./STEM24-App/
-      run: ng lint --format @microsoft/eslint-formatter-sarif --output-file lint.sarif
-      continue-on-error: true
+      run: ng lint --format @microsoft/eslint-formatter-sarif --output-file lint.sarif || true
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: sarif-files
+        path: STEM24-App/lint.sarif
 
     - name: Upload analysis results to GitHub
       uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: lint.sarif
-        wait-for-processing: true
 
     
     
