@@ -20,7 +20,7 @@
                 <p>(Event name, affected brand...)</p>
                 <mat-form-field class="filter-input">
                     <mat-label>Search</mat-label>
-                    <input matInput type="text" placeholder="Search...">
+                    <input [(ngModel)]="search" matInput type="text" placeholder="Search...">
                 </mat-form-field>
             </div>
             
@@ -37,9 +37,9 @@
                     </button>
                 </div>
                 <div class="flex-column">
-                    <mat-checkbox>To Do</mat-checkbox>
-                    <mat-checkbox>In Progress</mat-checkbox>
-                    <mat-checkbox>Done</mat-checkbox>
+                    <mat-checkbox [(ngModel)]="todoStatusChecked" color="primary">To Do</mat-checkbox>
+                    <mat-checkbox [(ngModel)]="inProgressStatusChecked" color="primary">In Progress</mat-checkbox>
+                    <mat-checkbox [(ngModel)]="doneStatusChecked" color="primary">Done</mat-checkbox>
                 </div>
                 
                 
@@ -58,25 +58,28 @@
                 </div>
                 <mat-form-field class="filter-input">
                     <mat-label>Date Selector</mat-label>
-                    <input matInput type="date">
+                    <input [(ngModel)]="date" matInput type="date">
                 </mat-form-field>
             </div>
+
+            <button
+                mat-flat-button
+                class="w-100"
+                color="primary"
+                (click)="applyFilters()"
+                style="margin-top: 20px;"
+            >
+                Apply filters
+            </button>
             
         </div>
         
         <!-- Events List -->
         <div class="events">
-            <!-- Event Cards -->
-            <div class="event-card">
-            <div class="event-info">
-                <span class="brand">Affected Brand</span>
-                <h2 class="event-title">Event Name</h2>
-                <p class="description">Description text</p>
-                <p class="date">Date and Time of Creation</p>
-            </div>
-            <button mat-button class="edit-button">Edit</button>
-            </div>
-            <!-- Repeat event cards as needed -->
+            @for (event of events; track event;) {
+                <app-event-card [event]="event"/>
+            }
+            
         </div>
     </div>
 </div>

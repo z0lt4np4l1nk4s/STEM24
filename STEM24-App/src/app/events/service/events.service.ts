@@ -10,3 +10,11 @@ export class EventsService {
     private http: HttpClient,
   ) { }
 }
+
+export type EventListItem = {
+  id: string;
+  affectedBrand: string;
+  name: string;
+  description: string;
+  date: string;
+}

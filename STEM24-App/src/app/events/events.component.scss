@@ -18,49 +18,23 @@
 }
 
 .filters {
-order: 1;
-padding: 10px;
-flex: 1;
+    order: 1;
+    padding: 10px;
+    flex: 1;
 }
 .filter {
-width: 100%;
+    width: 100%;
 }
 .filter-input {
-width: 100%;
+    width: 100%;
 }
 
 .events {
-order: 2;
-padding: 10px;
-flex: 3;
+    order: 2;
+    padding: 10px;
+    flex: 3;
 }
 
-.event-card {
-display: flex;
-flex-direction: row;
-background-color: #e9e9e9;
-padding: 20px;
-margin-bottom: 20px;
-}
-
-.event-info {
-flex-grow: 1;
-}
-
-.brand {
-    font-size: 14;
-    font-weight: 300;
-}
-
-.event-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 5px 0;
-}
-
-.edit-button {
-align-self: flex-end;
-}
 
 h1 {
     font-size: 20 !important;
