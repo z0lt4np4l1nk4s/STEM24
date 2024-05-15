@@ -1,0 +1,45 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Lint
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint-frontend:
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: "18.x"
+    - name: Install Angular cli
+      run: npm i -g @angular/cli 
+    - name: Nmp ci
+      working-directory: ./STEM24-App/
+      run: npm ci
+    - name: Install sarif formatter
+      working-directory: ./STEM24-App/
+      run: npm install @microsoft/eslint-formatter-sarif
+    - name: Lint
+      working-directory: ./STEM24-App/
+      run: ng lint --format @microsoft/eslint-formatter-sarif --output-file lint.sarif || true
+
+    - name: Upload analysis results to GitHub
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: ./STEM24-App/lint.sarif
+
+    
+    
+    
