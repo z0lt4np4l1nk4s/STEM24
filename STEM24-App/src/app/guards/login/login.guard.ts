@@ -10,7 +10,7 @@ export const loginGuard: CanActivateFn = (route, state) => {
     return true;
   } else {
     authService.logout();
-    router.navigate(['/dashboard']);
+    router.navigate(['/events']);
     return false;
   }
 };

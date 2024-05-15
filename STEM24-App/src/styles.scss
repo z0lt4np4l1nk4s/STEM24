@@ -36,6 +36,16 @@ h2 {
     display: flex;
     flex-direction: row;
 }
-.flex-1 {
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+.justify-between {
+    justify-content: space-between;
+}
+.align-center {
+    align-items: center;
+}
+ .flex-1 {
     flex: 1 ;
 }

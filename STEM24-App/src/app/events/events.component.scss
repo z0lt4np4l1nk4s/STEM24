@@ -1,0 +1,73 @@
+.body-container {
+    justify-content: flex-start;
+}
+
+.container {
+    width: 90%;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+  
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+    }
+}
+
+.filters {
+order: 1;
+padding: 10px;
+flex: 1;
+}
+.filter {
+width: 100%;
+}
+.filter-input {
+width: 100%;
+}
+
+.events {
+order: 2;
+padding: 10px;
+flex: 3;
+}
+
+.event-card {
+display: flex;
+flex-direction: row;
+background-color: #e9e9e9;
+padding: 20px;
+margin-bottom: 20px;
+}
+
+.event-info {
+flex-grow: 1;
+}
+
+.brand {
+    font-size: 14;
+    font-weight: 300;
+}
+
+.event-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.edit-button {
+align-self: flex-end;
+}
+
+h1 {
+    font-size: 20 !important;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 20;
+    font-weight: 600;
+}

@@ -1,0 +1,82 @@
+<div class="body-container">
+    <div class="container">
+
+        <!-- Filters Section -->
+        <div class="filters">
+            <h1 style="font-size: 24px !important;">Filters</h1>
+        
+            <!-- Search Box -->
+            <div class="filter" style="padding-top: 20px;">
+                <div class="w-100 flex-row space-between">
+                    <h2 style="font-size: 20px !important;">Search</h2>
+                    <button
+                        mat-button
+                        (click)="clearSearch()"
+                    >
+                        Clear
+                    </button>
+                </div>
+                
+                <p>(Event name, affected brand...)</p>
+                <mat-form-field class="filter-input">
+                    <mat-label>Search</mat-label>
+                    <input matInput type="text" placeholder="Search...">
+                </mat-form-field>
+            </div>
+            
+        
+            <!-- Event Status -->
+            <div class="filter" style="padding-top: 20px;">
+                <div class="w-100 flex-row space-between">
+                    <h2 style="font-size: 20px !important;">Event Status</h2>
+                    <button
+                        mat-button
+                        (click)="clearEventStatuses()"
+                    >
+                        Clear
+                    </button>
+                </div>
+                <div class="flex-column">
+                    <mat-checkbox>To Do</mat-checkbox>
+                    <mat-checkbox>In Progress</mat-checkbox>
+                    <mat-checkbox>Done</mat-checkbox>
+                </div>
+                
+                
+            </div>
+        
+            <!-- Date Selector -->
+            <div class="filter" style="padding-top: 20px;">
+                <div class="w-100 flex-row space-between">
+                    <h2 style="font-size: 20px !important;">Date</h2>
+                    <button
+                        mat-button
+                        (click)="clearDate()"
+                    >
+                        Clear
+                    </button>
+                </div>
+                <mat-form-field class="filter-input">
+                    <mat-label>Date Selector</mat-label>
+                    <input matInput type="date">
+                </mat-form-field>
+            </div>
+            
+        </div>
+        
+        <!-- Events List -->
+        <div class="events">
+            <!-- Event Cards -->
+            <div class="event-card">
+            <div class="event-info">
+                <span class="brand">Affected Brand</span>
+                <h2 class="event-title">Event Name</h2>
+                <p class="description">Description text</p>
+                <p class="date">Date and Time of Creation</p>
+            </div>
+            <button mat-button class="edit-button">Edit</button>
+            </div>
+            <!-- Repeat event cards as needed -->
+        </div>
+    </div>
+</div>

@@ -35,7 +35,7 @@ export class LoginComponent {
     this.authService.login({ email: this.email, password: this.password }).subscribe(
       (response) => {
         this.authService.saveTokens(response);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/events']);
       },
       (error) => {
         this.errorHandler.handleError(error);
