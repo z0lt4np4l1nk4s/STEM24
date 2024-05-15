@@ -51,14 +51,14 @@ jobs:
           # This is where you will need to introduce the Snyk API token created with your Snyk account
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: snyk auth $SNYK_TOKEN
-        
+
+      - name: mkdir sarif-files
+        run: mkdir sarif-files
+
         # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
         # Use || true to not fail the pipeline
       - name: Snyk Code test
         run: snyk code test --sarif --severity-threshold=low STEM24-Api/STEM24/ > sarif-files/snyk-code.sarif || true
-
-      - name: mkdir sarif-files
-        run: mkdir sarif-files
 
       - name: Snyk test
         run: snyk test --sarif --severity-threshold=low STEM24-Api/STEM24/ > sarif-files/snyk.sarif || true
