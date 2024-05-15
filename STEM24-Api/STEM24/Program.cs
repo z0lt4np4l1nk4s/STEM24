@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using STEM24.Abstractions.Repository;
 using STEM24.Mapping;
+using STEM24.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +60,8 @@ var typeAdapterConfig = TypeAdapterConfig.GlobalSettings;
 typeAdapterConfig.Scan(typeof(MapRegister).Assembly);
 var mapperConfig = new Mapper(typeAdapterConfig);
 builder.Services.AddSingleton<IMapper>(mapperConfig);
+
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 
 var app = builder.Build();

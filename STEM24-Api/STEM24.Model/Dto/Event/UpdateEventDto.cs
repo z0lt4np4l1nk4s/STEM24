@@ -1,8 +1,6 @@
-﻿using STEM24.Model.Enum;
+﻿namespace STEM24.Model.Dto;
 
-namespace STEM24.Model.Dto;
-
-public class AddEventDto
+public class UpdateEventDto
 {
     public string Name { get; set; } = default!;
 

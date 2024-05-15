@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.30" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.29" />
   </ItemGroup>
@@ -15,7 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\STEM24.Abstractions\STEM24.Abstractions.csproj" />
     <ProjectReference Include="..\STEM24.Model\STEM24.Model.csproj" />
-    <ProjectReference Include="..\STEM24.Repository\STEM24.Repository.csproj" />
   </ItemGroup>
 
 </Project>

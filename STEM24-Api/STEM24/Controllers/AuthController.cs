@@ -52,7 +52,7 @@ public class AuthController : ControllerBase
         {
             var userExists = await _userManager.FindByEmailAsync(model.Email);
             if (userExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "User already exists!" });
+                return ServiceResult.Failure("User already exists!").ToActionResult();
 
             UserEntity user = new()
             {
@@ -67,13 +67,13 @@ public class AuthController : ControllerBase
 
             if (result.Succeeded)
             {
-                return Ok(new { Status = "Success", Message = "User created successfully!" });
+                return ServiceResult.Success().ToActionResult();
             }
 
-            return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = string.Join(", ", result.Errors.Select(x => x.Description)) });
+            return ServiceResult.Failure(string.Join(", ", result.Errors.Select(x => x.Description))).ToActionResult();
         }
 
-        return BadRequest(new { Status = "Error", Message = "User registration failed! Please check user details and try again." });
+        return ServiceResult.Failure("User registration failed! Please check user details and try again.").ToActionResult();
     }
 
 }

@@ -22,7 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\STEM24.Abstractions\STEM24.Abstractions.csproj" />
     <ProjectReference Include="..\STEM24.Model\STEM24.Model.csproj" />
+    <ProjectReference Include="..\STEM24.Repository\STEM24.Repository.csproj" />
     <ProjectReference Include="..\STEM24.Service\STEM24.Service.csproj" />
   </ItemGroup>
 
