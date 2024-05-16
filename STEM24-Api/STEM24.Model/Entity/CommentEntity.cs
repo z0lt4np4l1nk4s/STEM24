@@ -3,6 +3,7 @@
 /// <summary>
 /// Comment entity
 /// </summary>
+[Table("Comments")]
 public class CommentEntity
 {
     /// <summary>

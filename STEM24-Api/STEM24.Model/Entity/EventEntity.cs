@@ -3,6 +3,7 @@
 /// <summary>
 /// Event entity
 /// </summary>
+[Table("Events")]
 public class EventEntity
 {
     /// <summary>

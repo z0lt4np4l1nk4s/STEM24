@@ -69,9 +69,7 @@ public class EventService : IEventService
         if (!string.IsNullOrEmpty(filter.Query))
         {
             var query = filter.Query.ToLower();
-            eventQueryable = eventQueryable.Where(x => x.Name.ToLower().StartsWith(query));
-            eventQueryable = eventQueryable.Where(x => x.Keywords.ToLower().StartsWith(query));
-            eventQueryable = eventQueryable.Where(x => x.MaliciousUrl.ToLower().StartsWith(query));
+            eventQueryable = eventQueryable.Where(x => x.MaliciousUrl.ToLower().StartsWith(query) || x.Keywords.ToLower().StartsWith(query) || x.Name.ToLower().StartsWith(query));
         }
 
         if (!string.IsNullOrEmpty(filter.Name))
@@ -91,7 +89,7 @@ public class EventService : IEventService
 
         if (filter.Date.HasValue)
         {
-            eventQueryable = eventQueryable.Where(x => x.CreationTime == filter.Date.Value);
+            eventQueryable = eventQueryable.Where(x => x.DomainRegistrationTime.Year == filter.Date.Value.Year && x.DomainRegistrationTime.Month == filter.Date.Value.Month && x.DomainRegistrationTime.Day == filter.Date.Value.Day);
         }
 
         if (filter.Status.HasValue)

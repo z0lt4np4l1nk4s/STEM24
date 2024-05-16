@@ -16,6 +16,11 @@ public class EventDto
     public Guid UserId { get; set; }
 
     /// <summary>
+    /// Description
+    /// </summary>
+    public string Description { get; set; } = default!;
+
+    /// <summary>
     /// Name
     /// </summary>
     public string Name { get; set; } = default!;

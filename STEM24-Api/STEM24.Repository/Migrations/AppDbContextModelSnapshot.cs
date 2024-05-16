@@ -149,7 +149,7 @@ namespace STEM24.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("STEM24.Model.Entity.DnsRecordEntity", b =>
@@ -177,7 +177,7 @@ namespace STEM24.Repository.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("DnsRecords");
+                    b.ToTable("DnsRecords", (string)null);
                 });
 
             modelBuilder.Entity("STEM24.Model.Entity.EventEntity", b =>
@@ -223,7 +223,7 @@ namespace STEM24.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("STEM24.Model.Entity.RoleEntity", b =>

@@ -3,6 +3,7 @@
 /// <summary>
 /// Dns record entity
 /// </summary>
+[Table("DnsRecords")]
 public class DnsRecordEntity
 {
     /// <summary>

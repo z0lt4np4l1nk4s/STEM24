@@ -112,4 +112,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var contect = services.GetRequiredService<AppDbContext>();
+    contect.Database.Migrate();
+}
+
 app.Run();
