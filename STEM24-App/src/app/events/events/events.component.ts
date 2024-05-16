@@ -46,6 +46,7 @@ export class EventsComponent implements OnInit, AfterViewInit {
 
   page: number = 1;
   perPage: number = 10;
+  totalCount = 0;
   pageSizeOptions: number[] = [10, 20, 50, 100];
   
   ngAfterViewInit(): void {
@@ -64,7 +65,7 @@ export class EventsComponent implements OnInit, AfterViewInit {
   preProcessFilters() {
     return {
       query: this.search ? this.search : undefined,
-      date: this.date ? this.date : undefined,
+      date: this.date ? (new Date(this.date)).toUTCString() : undefined,
     }
   }
 
@@ -73,7 +74,8 @@ export class EventsComponent implements OnInit, AfterViewInit {
     const filters = this.preProcessFilters();
     this.eventsService.getEvents(filters, this.page, this.perPage).subscribe({
       next: (data : any) => {
-        this.events = data;
+        this.totalCount = data.totalCount;
+        this.events = data.items;
         this.isLoading = false;
       },
       error: (error: any) => {

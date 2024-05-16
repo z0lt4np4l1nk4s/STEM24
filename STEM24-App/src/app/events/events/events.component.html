@@ -24,7 +24,7 @@
             </div>
             
         
-            <!-- Event Status -->
+            <!-- Event Status
             <div class="filter" style="padding-top: 20px;">
                 <div class="w-100 flex-row space-between">
                     <h2 style="font-size: 20px !important;">Event Status</h2>
@@ -37,7 +37,7 @@
                 </div>
                 
                 
-            </div>
+            </div> -->
         
             <!-- Date Selector -->
             <div class="filter" style="padding-top: 20px;">
@@ -80,8 +80,10 @@
                 }
     
                 <mat-paginator #paginator
+                  [showFirstLastButtons]="true"
                   [pageSize]="perPage"
                   [pageSizeOptions]="pageSizeOptions"
+                  [length]="totalCount"
                   aria-label="Select page">
                 </mat-paginator>
             }
@@ -91,6 +93,7 @@
                 </div>
                 
             }
+            
             
         </div>
 

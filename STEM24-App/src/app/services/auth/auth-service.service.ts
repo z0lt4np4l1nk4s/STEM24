@@ -63,7 +63,7 @@ export class AuthService {
   saveTokens(tokens: any): void {
     localStorage.setItem(this.access, tokens.token);
     localStorage.setItem(this.expiration, tokens.expiration)
-    localStorage.setItem(this.userId, tokens.user_id)
+    localStorage.setItem(this.userId, tokens.userId)
   }
 
   decodeToken(token: string): any {

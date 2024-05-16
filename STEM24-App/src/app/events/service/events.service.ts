@@ -20,7 +20,7 @@ export class EventsService {
     const q = {
       ...JSON.parse(JSON.stringify(filters)),
       pageNumber: page,
-      perPage
+      pageSize: perPage
 
     }
     
@@ -43,27 +43,6 @@ export class EventsService {
 
 }
 
-export type CreateEventType = {
-  userId: string;
-  name: string;
-  affectedBrand: string;
-  maliciousUrl: string;
-  domainRegistrationTime: string;
-  keywords: string[];
-  dnsRecords: CreateEventDnsRecord[];
-}
-
-export type CreateEventDnsRecord = {
-  type: string;
-  content: string;
-  name: string;
-}
-
-export type EventListItemfilters = {
-  query?: string,
-  date?: string,
-}
-
 export type EventListItem = {
   id: string;
   userId: string; 
@@ -79,6 +58,28 @@ export type EventListItem = {
   creationTime: string;
   dnsRecords: DnsRecord[];
   
+}
+
+export type CreateEventType = {
+  userId: string;
+  name: string;
+  affectedBrand: string;
+  maliciousUrl: string;
+  domainRegistrationTime: string;
+  keywords: string[];
+  description: string;
+  dnsRecords: CreateEventDnsRecord[];
+}
+
+export type CreateEventDnsRecord = {
+  type: string;
+  content: string;
+  name: string;
+}
+
+export type EventListItemfilters = {
+  query?: string,
+  date?: string,
 }
 
 export type DnsRecord = {

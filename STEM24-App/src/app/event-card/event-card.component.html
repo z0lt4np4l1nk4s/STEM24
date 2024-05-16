@@ -6,12 +6,18 @@
         <a style="text-decoration: inherit; color: inherit;" routerLink="/event/{{event.id}}">
             <h2 class="event-title">{{ event.name }}</h2>
         </a>
+
+        <mat-chip-set>
+            @for(kw of event.keywords; track kw;) {
+                <mat-chip>{{ kw }}</mat-chip>
+            }
+        </mat-chip-set>
         
         <p class="description">{{ event.description }}</p>
-        <p class="date">{{ event.date }}</p>
+        <p class="date">{{ registrationTime }}</p>
     </div>
 
-    <div class="event-edit">
+    <!-- <div class="event-edit">
         <button 
             mat-flat-button 
             color="primary" 
@@ -19,6 +25,6 @@
         >
             Edit
         </button>
-    </div>
+    </div> -->
     
 </div>
