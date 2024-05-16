@@ -115,6 +115,7 @@ export class UpsertEventComponent {
       maliciousUrl: this.maliciousUrl,
       domainRegistrationTime: this.maliciousDomainRegistrationDate,
       keywords: this.keywords,
+      description: this.description,
       dnsRecords: [
         ...ADnsRecords,
         ...MXDnsRecords,
@@ -124,6 +125,7 @@ export class UpsertEventComponent {
     }
     this.eventsService.createEvent(data).subscribe({
       next: (data) => {
+        console.log(data);
         this.msg.open("Event successfully created");
         this.router.navigate(['/events']);
       },
